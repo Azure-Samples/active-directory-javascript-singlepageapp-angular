@@ -19,6 +19,7 @@ A simple Angular single-page application which demonstrates how to configure [MS
 
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
+| `AppCreationScripts` | Contains automation scripts for Powershell users (can be safely removed if desired). |
 | `e2e`             | End-to-end test files.                     |
 | `src`             | Sample source code.                        |
 | `.editorconfig`   | Defines editor config settings.            |
