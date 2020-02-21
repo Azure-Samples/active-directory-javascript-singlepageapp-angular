@@ -31,9 +31,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     MsalModule.forRoot({
       auth: {
-        clientId: 'Enter_the_Application_Id_here', // This is your client ID
-        authority: 'https://login.microsoftonline.com/Enter_the_Tenant_Info_Here', // This is your tenant info
-        redirectUri: 'Enter_the_Redirect_Uri_Here' // This is your redirect URI
+        clientId: 'Enter_the_Application_Id_Here',
+        authority: 'Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here',
+        redirectUri: 'Enter_the_Redirect_Uri_Here',
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -49,7 +49,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       ],
       unprotectedResources: [],
       protectedResourceMap: [
-        ['https://graph.microsoft.com/v1.0/me', ['user.read']]
+        ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']]
       ],
       extraQueryParameters: {}
     })
