@@ -5,15 +5,25 @@ languages:
 - nodejs
 products:
 - azure-active-directory
-description: "A simple Angular single page application calling the Microsoft Graph using MSAL Angular (Azure AD V2 endpoint)."
+description: "Demonstrates how to use MSAL Angular to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph."
 urlFragment: "active-directory-javascript-singlepageapp-angular"
 ---
 
 # MSAL Angular Sample Application
 
-A simple Angular single-page application which demonstrates how to configure [MSAL Angular](https://www.npmjs.com/package/@azure/msal-angular) to login, logout, protect a route, and acquire an access token for a protected resource such as the Microsoft Graph.
+Demonstrates how to use [MSAL Angular](https://www.npmjs.com/package/@azure/msal-angular) to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph
 
 **Note:** This sample's structure was generated with the [Angular CLI](https://cli.angular.io/).
+
+## Key concepts
+
+This sample demonstrates the following MSAL Angular concepts:
+
+* Configuration
+* Login
+* Logout
+* Protecting a route
+* Acquiring an access token and attaching it to http calls
 
 ## Contents
 
@@ -41,28 +51,18 @@ A simple Angular single-page application which demonstrates how to configure [MS
 
 ## Prerequisites
 
-[Node](https://nodejs.org/en/) must be installed to run this sample.
+[Node.js](https://nodejs.org/en/) must be installed to run this sample.
 
 ## Setup
 
 1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
-2. Open the [src/app/app.module.ts](./src/app/app.module.ts) file and provide the required configuration values (inside `MsalModule.forRoot`).
-3. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
+2. Open [src/app/app.module.ts](./src/app/app.module.ts). Inside `MsalModule.forRoot` provide the required configuration values.
+3. Install project dependencies from the command line by navigating to the root of the repository and running `npm install`.
 
-## Running the sample
+## Run the sample
 
-1. To start the sample application, run `npm start`.
-2. Next, open a browser to [http://localhost:4200](http://localhost:4200).
-
-## Key concepts
-
-This sample demonstrates the following MSAL Angular concepts:
-
-* Configuration
-* Login
-* Logout
-* Protecting a route
-* Acquiring an access token and attaching it to http calls
+1. Start the sample application with `npm start`.
+2. In your browser, navigate to [http://localhost:4200](http://localhost:4200).
 
 ## Contributing
 
