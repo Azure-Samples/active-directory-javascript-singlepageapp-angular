@@ -9,7 +9,6 @@
         "x-ms-id": "AngularSpa",
         "x-ms-name": "active-directory-javascript-singlepageapp-angular",
         "x-ms-version": "2.0",
-        "logoutUrl": "http://localhost:4200/",
         "replyUrlsWithType": [
           {
             "url": "http://localhost:4200/",
@@ -31,10 +30,10 @@
             ]
           }
         ],
-        "codeConfigurations": [	
+        "codeConfigurations": [
           {
-          "settingFile": "/src/app/app.module.ts",  
-            "replaceTokens": 
+          "settingFile": "/src/app/app.module.ts",
+            "replaceTokens":
               {
               "appId": "Enter_the_Application_Id_Here",
               "tenantId": "Enter_the_Tenant_Info_Here",
