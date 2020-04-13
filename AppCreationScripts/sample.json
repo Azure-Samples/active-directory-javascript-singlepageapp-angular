@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "A simple Angular single page application calling the Microsoft Graph using MSAL Angular (Azure AD V2 endpoint)",
+      "Title": "A simple Angular single page application calling the Microsoft Graph API using MSAL-Angular (w/ Azure AD V2 endpoint)",
       "Level": 100,
       "Client": "SinglePageApplication",
       "Service": "Microsoft Graph",
@@ -27,7 +27,7 @@
     "CodeConfiguration": [
       {
         "App": "spa",
-        "SettingKind": "TypeScript",
+        "SettingKind": "Text",
         "SettingFile": "\\..\\src\\app\\app.module.ts",
         "Mappings": [
           {
