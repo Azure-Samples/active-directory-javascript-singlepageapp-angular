@@ -56,7 +56,7 @@ This sample demonstrates the following MSAL Angular concepts:
 ## Setup
 
 1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
-2. Open [src/app/app.module.ts](./src/app/app.module.ts). Inside `MsalModule.forRoot` provide the required configuration values.
+2. Open [src/app/app-config.json](./src/app/app-config.json) and provide the required configuration values.
 3. Install project dependencies from the command line by navigating to the root of the repository and running `npm install`.
 
 ## Run the sample

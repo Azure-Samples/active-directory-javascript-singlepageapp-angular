@@ -201,7 +201,7 @@ Function ConfigureApplications
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\src\app\app.module.ts"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "clientId" = $spaAadApplication.AppId;"authority" = "https://login.microsoftonline.com/"+$tenantName;"redirectUri" = $spaAadApplication.HomePage };
+   $dictionary = @{ "clientId" = $spaAadApplication.AppId;"authority" = "https://login.microsoftonline.com/"+$tenantName;"redirectUri" = $spaAadApplication.HomePage;"resourceUri" = 'https://graph.microsoft.com/v1.0/me' };
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary
   
    Add-Content -Value "</tbody></table></body></html>" -Path createdApps.html  

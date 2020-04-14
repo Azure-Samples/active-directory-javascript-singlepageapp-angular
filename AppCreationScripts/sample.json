@@ -13,6 +13,7 @@
         "Id": "spa",
         "Name": "active-directory-javascript-singlepageapp-angular",
         "Kind" :  "SinglePageApplication",
+        "Audience": "AzureADMultipleOrgs",
         "HomePage": "http://localhost:4200/",
         "ReplyUrls":"http://localhost:4200/",
         "RequiredResourcesAccess": [
@@ -41,6 +42,10 @@
           {
             "key": "redirectUri",
             "value": ".HomePage"
+          },
+          {
+            "key": "resourceUri",
+            "value": "'https://graph.microsoft.com/v1.0/me'"
           }
         ]
       }

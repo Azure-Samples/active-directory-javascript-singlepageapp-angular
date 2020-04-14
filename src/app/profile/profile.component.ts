@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MsalService } from '@azure/msal-angular';
 import { HttpClient } from '@angular/common/http';
+import * as config from '../app-config.json';
 
-const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+const GRAPH_ENDPOINT = config.resources.graphApi.resourceUri;
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +12,7 @@ const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 export class ProfileComponent implements OnInit {
   profile;
 
-  constructor(private authService: MsalService, private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getProfile();
