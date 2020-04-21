@@ -198,7 +198,15 @@ Function ConfigureApplications
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantName;"Enter_the_Redirect_Uri_Here" = $spaAadApplication.HomePage;"Enter_the_Graph_Endpoint_Herev1.0/me" = 'https://graph.microsoft.com/v1.0/me' };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
-  
+   Write-Host ""
+   Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
+   Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":
+   Write-Host "- For 'spa'"
+   Write-Host "  - Navigate to '$spaPortalUrl'"
+   Write-Host "  - Navigate to the Manifest page and change 'signInAudience' to 'AzureADandPersonalMicrosoftAccount'." -ForegroundColor Red 
+
+   Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
+     
    Add-Content -Value "</tbody></table></body></html>" -Path createdApps.html  
 }
 

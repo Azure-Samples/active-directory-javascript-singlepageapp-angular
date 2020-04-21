@@ -20,6 +20,11 @@
             "Resource": "Microsoft Graph",
             "DelegatedPermissions": [ "User.Read" ]
           }
+        ],
+        "ManualSteps": [
+          {
+            "Comment": "Navigate to the Manifest page and change 'signInAudience' to 'AzureADandPersonalMicrosoftAccount'."
+          }
         ]
       }
     ],
