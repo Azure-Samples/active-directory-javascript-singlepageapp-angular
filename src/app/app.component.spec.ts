@@ -2,9 +2,12 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MatToolbarModule, MatButtonModule, MatListModule } from '@angular/material';
+
 import { BroadcastService, MsalService, MsalAngularConfiguration } from '@azure/msal-angular';
 import { MSAL_CONFIG, MSAL_CONFIG_ANGULAR } from '@azure/msal-angular/dist/msal.service';
-import { Configuration } from 'msal';
+import { Configuration, CacheLocation } from 'msal';
+
+import * as config from './app-config.json';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -24,12 +27,12 @@ describe('AppComponent', () => {
           provide: MSAL_CONFIG,
           useValue: {
             auth: {
-              clientId: 'Enter_the_Application_Id_here', // This is your client ID
-              authority: 'https://login.microsoftonline.com/Enter_the_Tenant_Info_Here', // This is your tenant info
-              redirectUri: 'Enter_the_Redirect_Uri_Here' // This is your redirect URI
+              clientId: config.auth.clientId, // This is your client ID
+              authority: config.auth.authority, // This is your tenant info
+              redirectUri: config.auth.redirectUri, // This is your redirect URI
             },
             cache: {
-              cacheLocation: 'localStorage',
+              cacheLocation: <CacheLocation>config.cache.cacheLocation,
               storeAuthStateInCookie: false
             },
           } as Configuration
@@ -38,10 +41,13 @@ describe('AppComponent', () => {
           provide: MSAL_CONFIG_ANGULAR,
           useValue: {
             popUp: false,
-            consentScopes: [ 'user.read' ],
+            consentScopes: [
+              config.resources.graphApi.resourceScope,
+              ...config.scopes.loginRequest
+            ],
             unprotectedResources: [],
             protectedResourceMap: [
-              ['https://graph.microsoft.com/v1.0/me', ['user.read']]
+              [config.resources.graphApi.resourceUri, [config.resources.graphApi.resourceScope]]
             ]
           } as MsalAngularConfiguration
         },
