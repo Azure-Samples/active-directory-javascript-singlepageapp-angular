@@ -199,7 +199,7 @@ Function ConfigureApplications
    Write-Host "Granted permissions."
 
    # Update config file for 'spa'
-   $configFile = $pwd.Path + "\..\src\app\app.module.ts"
+   $configFile = $pwd.Path + "\..\src\app\app-config.json"
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "clientId" = $spaAadApplication.AppId;"authority" = "https://login.microsoftonline.com/"+$tenantName;"redirectUri" = $spaAadApplication.HomePage;"resourceUri" = 'https://graph.microsoft.com/v1.0/me' };
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary

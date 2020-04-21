@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "A simple Angular single page application calling the Microsoft Graph using MSAL Angular (Azure AD V2 endpoint)",
+      "Title": "An Angular single-page application calling the Microsoft Graph using MSAL-Angular (w/ AAD V2 endpoint)",
       "Level": 100,
       "Client": "SinglePageApplication"
     },
@@ -12,7 +12,7 @@
         "replyUrlsWithType": [
           {
             "url": "http://localhost:4200/",
-            "type": "Web"
+            "type": "Spa"
           }
         ],
         "oauth2AllowImplicitFlow": true,
@@ -32,7 +32,7 @@
         ],
         "codeConfigurations": [
           {
-          "settingFile": "/src/app/app.module.ts",
+          "settingFile": "/src/app/app-config.json",
             "replaceTokens":
               {
               "appId": "Enter_the_Application_Id_Here",

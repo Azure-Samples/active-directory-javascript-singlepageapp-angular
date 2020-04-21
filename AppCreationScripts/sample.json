@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "A simple Angular single page application calling the Microsoft Graph API using MSAL-Angular (w/ Azure AD V2 endpoint)",
+      "Title": "An Angular single-page application calling the Microsoft Graph using MSAL-Angular (w/ AAD V2 endpoint)",
       "Level": 100,
       "Client": "SinglePageApplication",
       "Service": "Microsoft Graph",
@@ -13,7 +13,6 @@
         "Id": "spa",
         "Name": "active-directory-javascript-singlepageapp-angular",
         "Kind" :  "SinglePageApplication",
-        "Audience": "AzureADMultipleOrgs",
         "HomePage": "http://localhost:4200/",
         "ReplyUrls":"http://localhost:4200/",
         "RequiredResourcesAccess": [
@@ -29,7 +28,7 @@
       {
         "App": "spa",
         "SettingKind": "Text",
-        "SettingFile": "\\..\\src\\app\\app.module.ts",
+        "SettingFile": "\\..\\src\\app\\app-config.json",
         "Mappings": [
           {
             "key": "clientId",
