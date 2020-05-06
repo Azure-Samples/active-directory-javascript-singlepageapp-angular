@@ -55,8 +55,7 @@ This sample demonstrates the following MSAL Angular concepts:
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/en/) must be installed to run this sample.
-- [Angular CLI](https://cli.angular.io/) must be installed to run this sample.
+[Node.js](https://nodejs.org/en/) must be installed to run this sample.
 
 ## Setup
 
