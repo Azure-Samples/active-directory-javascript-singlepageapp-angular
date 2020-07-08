@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "active-directory-javascript-singlepageapp-angular"
+    }
+  },
+  "defaultProject": "active-directory-javascript-singlepageapp-angular",
+  "cli": {
+    "analytics": false
+  }
 }
