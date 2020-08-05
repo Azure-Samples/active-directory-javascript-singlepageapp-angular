@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/b02fecd5-58d9-4001-afd4-ed27ef357944/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/angulartest1",
-    "appService.deploySubpath": "."
-}
