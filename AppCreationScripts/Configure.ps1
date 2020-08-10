@@ -2,8 +2,12 @@
 param(
     [PSCredential] $Credential,
     [Parameter(Mandatory=$False, HelpMessage='Tenant ID (This is a GUID which represents the "Directory ID" of the AzureAD tenant into which you want to create the apps')]
-    [string] $tenantId
+    [string] $tenantId,
+    [Parameter(Mandatory=$False, HelpMessage='Azure environment to use while running the script (it defaults to AzureCloud)')]
+    [string] $azureEnvironmentName
 )
+
+#Requires -Modules AzureAD
 
 <#
  This script creates the Azure AD applications needed for this sample and updates the configuration files
@@ -72,6 +76,37 @@ Function GetRequiredPermissions([string] $applicationDisplayName, [string] $requ
 }
 
 
+Function ReplaceInLine([string] $line, [string] $key, [string] $value)
+{
+    $index = $line.IndexOf($key)
+    if ($index -ige 0)
+    {
+        $index2 = $index+$key.Length
+        $line = $line.Substring(0, $index) + $value + $line.Substring($index2)
+    }
+    return $line
+}
+
+Function ReplaceInTextFile([string] $configFilePath, [System.Collections.HashTable] $dictionary)
+{
+    $lines = Get-Content $configFilePath
+    $index = 0
+    while($index -lt $lines.Length)
+    {
+        $line = $lines[$index]
+        foreach($key in $dictionary.Keys)
+        {
+            if ($line.Contains($key))
+            {
+                $lines[$index] = ReplaceInLine $line $key $dictionary[$key]
+            }
+        }
+        $index++
+    }
+
+    Set-Content -Path $configFilePath -Value $lines -Force
+}
+
 Set-Content -Value "<html><body><table>" -Path createdApps.html
 Add-Content -Value "<thead><tr><th>Application</th><th>AppId</th><th>Url in the Azure portal</th></tr></thead><tbody>" -Path createdApps.html
 
@@ -85,6 +120,11 @@ Function ConfigureApplications
    so that they are consistent with the Applications parameters
 #> 
     $commonendpoint = "common"
+    
+    if (!$azureEnvironmentName)
+    {
+        $azureEnvironmentName = "AzureCloud"
+    }
 
     # $tenantId is the Active Directory Tenant. This is a GUID which represents the "Directory ID" of the AzureAD tenant
     # into which you want to create the apps. Look it up in the Azure portal in the "Properties" of the Azure AD.
@@ -93,17 +133,17 @@ Function ConfigureApplications
     # you'll need to sign-in with creds enabling your to create apps in the tenant)
     if (!$Credential -and $TenantId)
     {
-        $creds = Connect-AzureAD -TenantId $tenantId
+        $creds = Connect-AzureAD -TenantId $tenantId -AzureEnvironmentName $azureEnvironmentName
     }
     else
     {
         if (!$TenantId)
         {
-            $creds = Connect-AzureAD -Credential $Credential
+            $creds = Connect-AzureAD -Credential $Credential -AzureEnvironmentName $azureEnvironmentName
         }
         else
         {
-            $creds = Connect-AzureAD -TenantId $tenantId -Credential $Credential
+            $creds = Connect-AzureAD -TenantId $tenantId -Credential $Credential -AzureEnvironmentName $azureEnvironmentName
         }
     }
 
@@ -111,6 +151,8 @@ Function ConfigureApplications
     {
         $tenantId = $creds.Tenant.Id
     }
+
+    
 
     $tenant = Get-AzureADTenantDetail
     $tenantName =  ($tenant.VerifiedDomains | Where { $_._Default -eq $True }).Name
@@ -126,7 +168,6 @@ Function ConfigureApplications
                                                -ReplyUrls "http://localhost:4200/" `
                                                -IdentifierUris "https://$tenantName/active-directory-javascript-singlepageapp-angular" `
                                                -AvailableToOtherTenants $True `
-                                               -Oauth2AllowImplicitFlow $true `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 
@@ -165,6 +206,8 @@ Function ConfigureApplications
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\src\app\app.module.ts"
    Write-Host "Updating the sample code ($configFile)"
+   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantName;"Enter_the_Redirect_Uri_Here" = $spaAadApplication.HomePage;"Enter_the_Graph_Endpoint_Here" = "https://graph.microsoft.com/" };
+   ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
   
    Add-Content -Value "</tbody></table></body></html>" -Path createdApps.html  
 }

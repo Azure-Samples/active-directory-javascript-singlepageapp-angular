@@ -63,7 +63,34 @@ This sample demonstrates the following MSAL Angular concepts:
 
 1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
 
-2. Open [src/app/app.module.ts](./src/app/app.module.ts). Inside `MsalModule.forRoot` provide the required configuration values.
+2. Open [src/app/app.module.ts](./src/app/app.module.ts). Inside `MsalModule.forRoot` provide the required configuration values -in particular: `clientId`, `authority`, `redirectUri` and `protectedResourceMap`.
+
+```typescript
+    MsalModule.forRoot({
+      auth: {
+        clientId: 'Enter_the_Application_Id_Here',
+        authority: 'Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here',
+        redirectUri: 'Enter_the_Redirect_Uri_Here',
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: isIE, // set to true for IE 11
+      },
+    },
+    {
+      popUp: !isIE,
+      consentScopes: [
+        'user.read',
+        'openid',
+        'profile',
+      ],
+      unprotectedResources: [],
+      protectedResourceMap: [
+        ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']] // activates MsalGuard for the listed resources here
+      ],
+      extraQueryParameters: {}
+    })
+```
 
 > **Note**: In order to support sign-ins with **work and school accounts** as well as **personal Microsoft accounts**, set your `authority` to use the /common endpoint i.e. `https://login.microsoftonline.com/common`. Read more about [msal.js configuration options](https://docs.microsoft.com/azure/active-directory/develop/msal-js-initializing-client-applications#configuration-options).
 
