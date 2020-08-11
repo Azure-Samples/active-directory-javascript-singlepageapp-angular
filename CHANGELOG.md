@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 08/08/2020
+
+* Added further clarifications to README about config parameters.
+* Updated powershell scripts and replacement method.
+
 ## 08/05/2020
 
 * Updated MSAL.js to `@1.3.4`.
