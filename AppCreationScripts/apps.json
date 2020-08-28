@@ -32,7 +32,7 @@
         ],
         "codeConfigurations": [
           {
-          "settingFile": "/src/app/app.module.ts",
+          "settingFile": "/src/app/app-config.json",
             "replaceTokens":
               {
               "appId": "Enter_the_Application_Id_Here",
