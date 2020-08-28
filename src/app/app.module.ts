@@ -50,7 +50,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         'openid',
         'profile',
       ],
-      unprotectedResources: [],
       protectedResourceMap: [
         [config.resources.graphApi.resourceUri, [config.resources.graphApi.resourceScope]]
       ],
