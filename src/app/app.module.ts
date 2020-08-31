@@ -31,7 +31,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MatToolbarModule,
     MatButtonModule,
     MatListModule,
-    AppRoutingModule,
     MsalModule.forRoot({
       auth: {
         clientId: config.auth.clientId,
@@ -45,11 +44,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     },
     {
       popUp: !isIE,
-      consentScopes: [
-        'user.read',
-        'openid',
-        'profile',
-      ],
+      consentScopes: config.scopes.loginRequest,
       protectedResourceMap: [
         [config.resources.graphApi.resourceUri, [config.resources.graphApi.resourceScope]]
       ],

@@ -4,9 +4,18 @@ import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BroadcastService, MsalService, MsalAngularConfiguration } from '@azure/msal-angular';
-import { MSAL_CONFIG, MSAL_CONFIG_ANGULAR } from '@azure/msal-angular/dist/msal.service';
-import { Configuration } from 'msal';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { Configuration, CacheLocation } from 'msal';
+import { 
+  BroadcastService, 
+  MsalService, 
+  MsalAngularConfiguration,
+  MSAL_CONFIG, 
+  MSAL_CONFIG_ANGULAR } 
+from '@azure/msal-angular';
+
+import * as config from './app-config.json'; 
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -16,6 +25,8 @@ describe('AppComponent', () => {
         MatToolbarModule,
         MatButtonModule,
         MatListModule,
+        BrowserModule,
+        HttpClientModule,
       ],
       declarations: [
         AppComponent
@@ -26,13 +37,13 @@ describe('AppComponent', () => {
           provide: MSAL_CONFIG,
           useValue: {
             auth: {
-              clientId: 'Enter_the_Application_Id_here', // This is your client ID
-              authority: 'https://login.microsoftonline.com/Enter_the_Tenant_Info_Here', // This is your tenant info
-              redirectUri: 'Enter_the_Redirect_Uri_Here' // This is your redirect URI
+              clientId: config.auth.clientId,
+              authority: config.auth.authority,
+              redirectUri: config.auth.redirectUri
             },
             cache: {
-              cacheLocation: 'localStorage',
-              storeAuthStateInCookie: false
+              cacheLocation: <CacheLocation>config.cache.cacheLocation,
+              storeAuthStateInCookie: false, // set to true for IE 11
             },
           } as Configuration
         },
@@ -40,11 +51,10 @@ describe('AppComponent', () => {
           provide: MSAL_CONFIG_ANGULAR,
           useValue: {
             popUp: false,
-            consentScopes: [ 'user.read' ],
-            unprotectedResources: [],
+            consentScopes: config.scopes.loginRequest,
             protectedResourceMap: [
-              ['https://graph.microsoft.com/v1.0/me', ['user.read']]
-            ]
+              [config.resources.graphApi.resourceUri, [config.resources.graphApi.resourceScope]]
+            ],
           } as MsalAngularConfiguration
         },
         BroadcastService

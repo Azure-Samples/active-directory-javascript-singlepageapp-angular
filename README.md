@@ -6,14 +6,15 @@ languages:
 products:
 - azure-active-directory
 - microsoft-authentication-library
+- ms-graph
 - angular
 description: "Demonstrates how to use MSAL Angular to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph."
 urlFragment: "active-directory-javascript-singlepageapp-angular"
 ---
 
-# MSAL Angular Sample Application
+# Angular Single-page Application built with MSAL Angular and Microsoft identity platform
 
-Demonstrates how to use [MSAL Angular](https://www.npmjs.com/package/@azure/msal-angular) to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph
+This sample demonstrates how to use [MSAL Angular](https://www.npmjs.com/package/@azure/msal-angular) to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph.
 
 **Note:** A quickstart guide covering this sample can be found [here](https://docs.microsoft.com/azure/active-directory/develop/quickstart-v2-angular).
 
@@ -63,38 +64,57 @@ This sample demonstrates the following MSAL Angular concepts:
 
 1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
 
-2. Open [src/app/app.module.ts](./src/app/app.module.ts). Inside `MsalModule.forRoot` provide the required configuration values -in particular: `clientId`, `authority`, `redirectUri` and `protectedResourceMap`.
+2. Open [src/app/app-config.json](./src/app/app-config.json) and provide the required configuration values:
+
+```JSON
+{
+    "auth": {
+        "clientId": "4ab6afd7-7639-46fe-9fb0-306bbab8e342",
+        "authority": "https://login.microsoftonline.com/common",
+        "redirectUri": "http://localhost:4200"
+    },
+    "cache": {
+        "cacheLocation": "localStorage"
+    },
+    "scopes": {
+        "loginRequest": ["openid", "profile", "User.Read"]
+    },
+    "resources": {
+        "graphApi": {
+            "resourceUri": "https://graph.microsoft.com/v1.0/me",
+            "resourceScope": "User.Read"
+        }
+    }
+}
+```
+
+Your configuration parameters will be loaded inside `MsalModule.forRoot` in [src/app/app.module.ts](./src/app/app.module.ts).
 
 ```typescript
     MsalModule.forRoot({
       auth: {
-        clientId: 'Enter_the_Application_Id_Here',
-        authority: 'Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here',
-        redirectUri: 'Enter_the_Redirect_Uri_Here',
+        clientId: config.auth.clientId,
+        authority: config.auth.authority,
+        redirectUri: config.auth.redirectUri
       },
       cache: {
-        cacheLocation: 'localStorage',
+        cacheLocation: <CacheLocation>config.cache.cacheLocation,
         storeAuthStateInCookie: isIE, // set to true for IE 11
       },
     },
     {
       popUp: !isIE,
-      consentScopes: [
-        'user.read',
-        'openid',
-        'profile',
-      ],
-      unprotectedResources: [],
+      consentScopes: config.scopes.loginRequest,
       protectedResourceMap: [
-        ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']] // activates MsalGuard for the listed resources here
+        [config.resources.graphApi.resourceUri, [config.resources.graphApi.resourceScope]]
       ],
       extraQueryParameters: {}
     })
 ```
 
-> **Note**: In order to support sign-ins with **work and school accounts** as well as **personal Microsoft accounts**, set your `authority` to use the /common endpoint i.e. `https://login.microsoftonline.com/common`. Read more about [msal.js configuration options](https://docs.microsoft.com/azure/active-directory/develop/msal-js-initializing-client-applications#configuration-options).
+> :information_source: In order to support sign-ins with **work and school accounts** as well as **personal Microsoft accounts**, set your `authority` to use the **common** endpoint i.e. `https://login.microsoftonline.com/common`. Read more about [msal.js configuration options](https://docs.microsoft.com/azure/active-directory/develop/msal-js-initializing-client-applications#configuration-options).
 
-3. Install project dependencies from the command line by navigating to the root of the repository and running `npm install`.
+1. Install project dependencies from the command line by navigating to the root of the repository and running `npm install`.
 
 ## Run the sample
 
