@@ -3,9 +3,6 @@
 ## 08/31/2020
 
 * Updated MSAL.js to 1.4.0 and MSAL-Angular to 1.1.1.
-* Configuration parameters moved to app-config.json.
-* Updated automated tests to load config parameters.
-* Updated README.md to reflect setup changes.
 * Fixed the favicon loading issue.
 
 ## 08/08/2020

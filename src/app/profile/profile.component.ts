@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { HttpClient } from '@angular/common/http';
 import { InteractionRequiredAuthError, AuthError } from 'msal';
-import * as config from '../app-config.json';
 
-const GRAPH_ENDPOINT = config.resources.graphApi.resourceUri;;
+const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
 @Component({
   selector: 'app-profile',

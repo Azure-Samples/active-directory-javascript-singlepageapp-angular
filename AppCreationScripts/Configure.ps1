@@ -7,7 +7,7 @@ param(
     [string] $azureEnvironmentName
 )
 
-#Requires -Modules AzureAD
+#Requires -Modules AzureAD -RunAsAdministrator
 
 <#
  This script creates the Azure AD applications needed for this sample and updates the configuration files
@@ -205,7 +205,7 @@ Function ConfigureApplications
    Write-Host "Granted permissions."
 
    # Update config file for 'spa'
-   $configFile = $pwd.Path + "\..\src\app\app-config.json"
+   $configFile = $pwd.Path + "\..\src\app\app.module.ts"
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantName;"Enter_the_Redirect_Uri_Here" = $spaAadApplication.HomePage;"Enter_the_Graph_Endpoint_Here" = "https://graph.microsoft.com/" };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary

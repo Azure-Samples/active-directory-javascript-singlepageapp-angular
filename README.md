@@ -2,12 +2,11 @@
 page_type: sample
 languages:
 - javascript
-- nodejs
+- typescript
 products:
-- azure-active-directory
-- microsoft-authentication-library
-- ms-graph
 - angular
+- ms-graph
+- azure-active-directory
 description: "Demonstrates how to use MSAL Angular to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph."
 urlFragment: "active-directory-javascript-singlepageapp-angular"
 ---
@@ -64,49 +63,30 @@ This sample demonstrates the following MSAL Angular concepts:
 
 1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
 
-2. Open [src/app/app-config.json](./src/app/app-config.json) and provide the required configuration values:
-
-```JSON
-{
-    "auth": {
-        "clientId": "4ab6afd7-7639-46fe-9fb0-306bbab8e342",
-        "authority": "https://login.microsoftonline.com/common",
-        "redirectUri": "http://localhost:4200"
-    },
-    "cache": {
-        "cacheLocation": "localStorage"
-    },
-    "scopes": {
-        "loginRequest": ["openid", "profile", "User.Read"]
-    },
-    "resources": {
-        "graphApi": {
-            "resourceUri": "https://graph.microsoft.com/v1.0/me",
-            "resourceScope": "User.Read"
-        }
-    }
-}
-```
-
-Your configuration parameters will be loaded inside `MsalModule.forRoot` in [src/app/app.module.ts](./src/app/app.module.ts).
+2. Open [src/app/app.module.ts](./src/app/app.module.ts) and provide the required configuration parameters:
 
 ```typescript
     MsalModule.forRoot({
       auth: {
-        clientId: config.auth.clientId,
-        authority: config.auth.authority,
-        redirectUri: config.auth.redirectUri
+        clientId: 'Enter_the_Application_Id_Here',
+        authority: 'Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here',
+        redirectUri: 'Enter_the_Redirect_Uri_Here',
       },
       cache: {
-        cacheLocation: <CacheLocation>config.cache.cacheLocation,
+        cacheLocation: 'localStorage',
         storeAuthStateInCookie: isIE, // set to true for IE 11
       },
     },
     {
       popUp: !isIE,
-      consentScopes: config.scopes.loginRequest,
+      consentScopes: [
+        'user.read',
+        'openid',
+        'profile',
+      ],
+      unprotectedResources: [],
       protectedResourceMap: [
-        [config.resources.graphApi.resourceUri, [config.resources.graphApi.resourceScope]]
+        ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']]
       ],
       extraQueryParameters: {}
     })

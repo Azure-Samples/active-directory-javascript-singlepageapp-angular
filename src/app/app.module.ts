@@ -5,15 +5,14 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
-import { CacheLocation } from 'msal';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
-import * as config from './app-config.json'; 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -31,22 +30,28 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MatToolbarModule,
     MatButtonModule,
     MatListModule,
+    AppRoutingModule,
     MsalModule.forRoot({
       auth: {
-        clientId: config.auth.clientId,
-        authority: config.auth.authority,
-        redirectUri: config.auth.redirectUri
+        clientId: 'Enter_the_Application_Id_Here',
+        authority: 'Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here',
+        redirectUri: 'Enter_the_Redirect_Uri_Here',
       },
       cache: {
-        cacheLocation: <CacheLocation>config.cache.cacheLocation,
+        cacheLocation: 'localStorage',
         storeAuthStateInCookie: isIE, // set to true for IE 11
       },
     },
     {
       popUp: !isIE,
-      consentScopes: config.scopes.loginRequest,
+      consentScopes: [
+        'user.read',
+        'openid',
+        'profile',
+      ],
+      unprotectedResources: [],
       protectedResourceMap: [
-        [config.resources.graphApi.resourceUri, [config.resources.graphApi.resourceScope]]
+        ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']]
       ],
       extraQueryParameters: {}
     })

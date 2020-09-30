@@ -29,7 +29,7 @@
       {
         "App": "spa",
         "SettingKind": "Replace",
-        "SettingFile": "\\..\\src\\app\\app-config.json",
+        "SettingFile": "\\..\\src\\app\\app.module.ts",
         "Mappings": [
           {
             "key": "Enter_the_Application_Id_Here",
