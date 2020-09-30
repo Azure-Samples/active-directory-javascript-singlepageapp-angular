@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BroadcastService, MsalService, MsalAngularConfiguration } from '@azure/msal-angular';
-import { MSAL_CONFIG, MSAL_CONFIG_ANGULAR } from '@azure/msal-angular/dist/msal.service';
+import { MSAL_CONFIG, MSAL_CONFIG_ANGULAR } from '@azure/msal-angular';
 import { Configuration } from 'msal';
 
 describe('AppComponent', () => {

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 08/31/2020
+
+* Updated MSAL.js to 1.4.0 and MSAL-Angular to 1.1.1.
+* Fixed the favicon loading issue.
+
 ## 08/08/2020
 
 * Added further clarifications to README about config parameters.

@@ -7,7 +7,7 @@ param(
     [string] $azureEnvironmentName
 )
 
-#Requires -Modules AzureAD
+#Requires -Modules AzureAD -RunAsAdministrator
 
 <#
  This script creates the Azure AD applications needed for this sample and updates the configuration files
@@ -168,6 +168,7 @@ Function ConfigureApplications
                                                -ReplyUrls "http://localhost:4200/" `
                                                -IdentifierUris "https://$tenantName/active-directory-javascript-singlepageapp-angular" `
                                                -AvailableToOtherTenants $True `
+                                               -Oauth2AllowImplicitFlow $true `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 

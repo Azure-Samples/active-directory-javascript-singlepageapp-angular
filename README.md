@@ -2,18 +2,18 @@
 page_type: sample
 languages:
 - javascript
-- nodejs
+- typescript
 products:
-- azure-active-directory
-- microsoft-authentication-library
 - angular
+- ms-graph
+- azure-active-directory
 description: "Demonstrates how to use MSAL Angular to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph."
 urlFragment: "active-directory-javascript-singlepageapp-angular"
 ---
 
-# MSAL Angular Sample Application
+# Angular Single-page Application built with MSAL Angular and Microsoft identity platform
 
-Demonstrates how to use [MSAL Angular](https://www.npmjs.com/package/@azure/msal-angular) to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph
+This sample demonstrates how to use [MSAL Angular](https://www.npmjs.com/package/@azure/msal-angular) to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph.
 
 **Note:** A quickstart guide covering this sample can be found [here](https://docs.microsoft.com/azure/active-directory/develop/quickstart-v2-angular).
 
@@ -63,7 +63,7 @@ This sample demonstrates the following MSAL Angular concepts:
 
 1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
 
-2. Open [src/app/app.module.ts](./src/app/app.module.ts). Inside `MsalModule.forRoot` provide the required configuration values -in particular: `clientId`, `authority`, `redirectUri` and `protectedResourceMap`.
+2. Open [src/app/app.module.ts](./src/app/app.module.ts) and provide the required configuration parameters:
 
 ```typescript
     MsalModule.forRoot({
@@ -86,15 +86,15 @@ This sample demonstrates the following MSAL Angular concepts:
       ],
       unprotectedResources: [],
       protectedResourceMap: [
-        ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']] // activates MsalGuard for the listed resources here
+        ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']]
       ],
       extraQueryParameters: {}
     })
 ```
 
-> **Note**: In order to support sign-ins with **work and school accounts** as well as **personal Microsoft accounts**, set your `authority` to use the /common endpoint i.e. `https://login.microsoftonline.com/common`. Read more about [msal.js configuration options](https://docs.microsoft.com/azure/active-directory/develop/msal-js-initializing-client-applications#configuration-options).
+> :information_source: In order to support sign-ins with **work and school accounts** as well as **personal Microsoft accounts**, set your `authority` to use the **common** endpoint i.e. `https://login.microsoftonline.com/common`. Read more about [msal.js configuration options](https://docs.microsoft.com/azure/active-directory/develop/msal-js-initializing-client-applications#configuration-options).
 
-3. Install project dependencies from the command line by navigating to the root of the repository and running `npm install`.
+1. Install project dependencies from the command line by navigating to the root of the repository and running `npm install`.
 
 ## Run the sample
 
