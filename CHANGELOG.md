@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 10/02/2020
+
+* Updated MSAL.js to 1.4.1 (resolves id token cache issue).
+
 ## 08/31/2020
 
 * Updated MSAL.js to 1.4.0 and MSAL-Angular to 1.1.1.
