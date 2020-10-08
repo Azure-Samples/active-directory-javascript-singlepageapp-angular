@@ -2,7 +2,7 @@
 
 ## 10/07/2020
 
-* Added unsubscribe broadcast events.
+* Added unsubscribe to broadcast events.
 
 ## 10/02/2020
 
