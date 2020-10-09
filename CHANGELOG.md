@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 10/07/2020
+
+* Added unsubscribe to broadcast events.
+
 ## 10/02/2020
 
 * Updated MSAL.js to 1.4.1 (resolves id token cache issue).

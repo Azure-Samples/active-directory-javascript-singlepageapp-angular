@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BroadcastService, MsalService } from '@azure/msal-angular';
 import { Logger, CryptoUtils } from 'msal';
 
@@ -8,6 +9,8 @@ import { Logger, CryptoUtils } from 'msal';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  subscriptions: Subscription[] = [];
+
   title = 'MSAL Angular - Sample App';
   isIframe = false;
   loggedIn = false;
@@ -15,13 +18,23 @@ export class AppComponent implements OnInit {
   constructor(private broadcastService: BroadcastService, private authService: MsalService) { }
 
   ngOnInit() {
+    let loginSuccessSubscription: Subscription;
+    let loginFailureSubscription: Subscription;
+
     this.isIframe = window !== window.parent && !window.opener;
 
     this.checkAccount();
 
-    this.broadcastService.subscribe('msal:loginSuccess', () => {
+    loginSuccessSubscription = this.broadcastService.subscribe('msal:loginSuccess', () => {
       this.checkAccount();
     });
+
+    loginFailureSubscription = this.broadcastService.subscribe('msal:loginFailure', (error) => {
+      console.log('Login Fails:', error);
+    });
+
+    this.subscriptions.push(loginSuccessSubscription);
+    this.subscriptions.push(loginFailureSubscription);
 
     this.authService.handleRedirectCallback((authError, response) => {
       if (authError) {
@@ -38,6 +51,10 @@ export class AppComponent implements OnInit {
       correlationId: CryptoUtils.createNewGuid(),
       piiLoggingEnabled: false
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   checkAccount() {
