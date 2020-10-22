@@ -101,6 +101,8 @@ This sample demonstrates the following MSAL Angular concepts:
 1. Start the sample application with `npm start`.
 2. In your browser, navigate to [http://localhost:4200](http://localhost:4200).
 
+> How did we do? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUOU1PMDY4MVlPNzU3NFM2M0JXREc2VkZDQSQlQCN0PWcu).
+
 ## Contributing
 
 If you'd like to contribute to this sample, see [CONTRIBUTING.MD](./CONTRIBUTING.md).
