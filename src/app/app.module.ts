@@ -49,7 +49,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         'openid',
         'profile',
       ],
-      unprotectedResources: [],
       protectedResourceMap: [
         ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']]
       ],

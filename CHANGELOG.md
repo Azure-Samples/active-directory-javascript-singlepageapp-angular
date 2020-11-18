@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 11/18/2020
+
+* Updated MSAL.js to 1.4.4 and MSAL-Angular to 1.1.2.
+
 ## 10/07/2020
 
 * Added unsubscribe to broadcast events.
